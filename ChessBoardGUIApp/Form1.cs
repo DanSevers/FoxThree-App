@@ -6,10 +6,11 @@ namespace ChessBoardGUIApp
     public partial class Form1 : Form
     {
         //reference to the class Board. Contains tyhe values of the board.
-        static Board myBoard = new Board(8);
+        static Board myBoard = new Board(25);
 
         // 2D array of buttons whose values are determined by myBoard.
         public Button[,] btnGrid = new Button[myBoard.Size, myBoard.Size];
+        private string _selectedWeapon;
 
         public Form1()
         {
@@ -35,17 +36,18 @@ namespace ChessBoardGUIApp
                     btnGrid[i, j].Width = buttonSize;
                     btnGrid[i, j].Height = buttonSize;
 
-                    // add a click event  to each button.
+                    // add a click event to each button.
                     btnGrid[i, j].Click += Grid_Button_Click;
 
-                    // add  the new button to the panel.
+                    // add the new button to the panel.
                     panel1.Controls.Add(btnGrid[i, j]); ;
 
                     // set the location of the new button.
                     btnGrid[i, j].Location = new Point(i * buttonSize, j * buttonSize);
 
-                    btnGrid[i, j].Text = i + "|" + j;
+                    btnGrid[i, j].Text = i + "- " + j;
                     btnGrid[i, j].Tag = new Point(i, j);
+                    btnGrid[i, j].Font = new Font(Font.FontFamily, 7);
                 }
 
 
@@ -53,6 +55,10 @@ namespace ChessBoardGUIApp
 
 
         }
+
+        // Create another click event to mark where your target is before entering the next click event below.
+
+
 
         public void Grid_Button_Click(object? sender, EventArgs e)
         {
@@ -67,19 +73,19 @@ namespace ChessBoardGUIApp
             Cell currentCell = myBoard.theGrid[x, y];
 
             // determine legal next moves
-            // change "Knight" to a variable from comboBox.
-            myBoard.MarkNextLegalMoves(currentCell, "Rook");
+            // change "AIM-120" to a value from the comboBox.
+            myBoard.MarkNextLegalMoves(currentCell, _selectedWeapon);
 
             // update the text on each button - BONUS for my next project- change colour of button too
             for (int i = 0; i < myBoard.Size; i++)
             {
                 for (int j = 0; j < myBoard.Size; j++)
                 {
-                    btnGrid[i, j].Text = ("");
+                    //btnGrid[i, j].Text = ("");
                     if (myBoard.theGrid[i, j].LegalNextMove == true)
                     {
                         //btnGrid[i, j].Text = "Legal";
-                        btnGrid[i, j].BackColor = Color.Green;
+                        btnGrid[i, j].BackColor = Color.Red;
                     }
                     else if (myBoard.theGrid[i, j].CurrentlyOccupied == true)
                     {
@@ -109,30 +115,44 @@ namespace ChessBoardGUIApp
 
         // event handler for different pieces
         // figure out how to reference chessPiece from Board.cs
+
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             ComboBox comboBox = (ComboBox)sender;
-            string selectedChessPiece = comboBox.SelectedItem.ToString();
-            if (selectedChessPiece == "Knight")
+            //string selectedWeapon = comboBox.SelectedItem.ToString();
+
+            _selectedWeapon = comboBox.SelectedItem.ToString();
+
+            /*if (selectedWeapon == "AIM-120")
             {
-                object chessPiece = "Knight";
+                object weaponChoice = "AIM-120";
             }
-            else  if (selectedChessPiece == "King")
+            else  if (selectedWeapon == "AIRS-T")
             {
-                object chessPiece = "King";
+                object weaponChoice = "AIRS-T";
             }
-            else if (selectedChessPiece == "Rook")
+            else if (selectedWeapon == "GBU-38")
             {
-                object chessPiece = "Rook";
+                object weaponChoice = "GBU-38";
             }
-            else if (selectedChessPiece == "Bishop")
+            else if (selectedWeapon == "AGM-88")
             {
-                object chessPiece = "Bishop";
+                object weaponChoice = "AGM-88";
             }
-            else if (selectedChessPiece == "Queen")
+            else if (selectedWeapon == "Vulcan Cannon")
             {
-                object chessPiece = "Queen";
+                object weaponChoice = "Vulcan Cannon";
+            
             }
+            */
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            // Clear current onscreen targeting info
+            
+                }
+            
     }
 }

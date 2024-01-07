@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,9 +36,6 @@ namespace ChessBoardModel1
 
 
         }
-        // bool isSafe has been created to try to create multiple legal next moves markers for pieces that can travel all over the board.
-        
-        //bool isSafe = true;
 
         public bool inBounds(int x, int y)
         {
@@ -55,7 +53,562 @@ namespace ChessBoardModel1
             }
         }
 
-        public void MarkNextLegalMoves( Cell currentCell, object chessPiece)
+
+
+        #region Targeting System 
+        // (Needs simplifying LOL)
+
+
+        // north targeting range
+        private void TargetNorth(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 0;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - 0, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell ++;
+                columnIndexer ++;
+            }
+        }
+
+        // south targeting range
+        private void TargetSouth(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 0;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - 0, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell ++;
+                columnIndexer ++;
+            }
+        }
+
+        // east targeting range
+        private void TargetEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 0;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - 0].LegalNextMove = true;
+                startingCell ++;
+                rowIndexer++;
+            }
+        }
+
+        // west targeting range
+        private void TargetWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 0;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - 0].LegalNextMove = true;
+                startingCell ++;
+                rowIndexer++;
+            }
+        }
+
+        // northeast targeting range
+        private void TargetNorthEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // northwest targeting range
+        private void TargetNorthWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // southeast targeting range
+        private void TargetSouthEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // southeast targeting range
+        private void TargetSouthWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // northnortheast targeting range
+        private void TargetNNEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // northnorthwest targeting range
+        private void TargetNNWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // eastnortheast targeting range
+        private void TargetENEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // westnorthwest targeting range
+        private void TargetWNWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // southsoutheast targeting range
+        private void TargetSSEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // southsouthwest targeting range
+        private void TargetSSWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // eastsoutheast targeting range
+        private void TargetESEast(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // westsouthwest targeting range
+        private void TargetWSWest(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        //Experimental
+
+        // upper east targeting range
+        private void TargetEastA(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                //columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // upper west targeting range
+        private void TargetWestA(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                //columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // upper east targeting range
+        private void TargetEastB(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                //columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // upper west targeting range
+        private void TargetWestB(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                //columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // upper east targeting range
+        private void TargetNorthA(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                //rowIndexer++;
+            }
+        }
+
+        // upper west targeting range
+        private void TargetSouthA(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                //rowIndexer++;
+            }
+        }
+
+        // upper east targeting range
+        private void TargetNorthB(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                //rowIndexer++;
+            }
+        }
+
+        // upper west targeting range
+        private void TargetSouthB(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                //rowIndexer++;
+            }
+        }
+
+        // Extras -------------------------------
+
+        // northeastextra targeting range
+        private void TargetextraNE(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + 2, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // northwestextra targeting range
+        private void TargetextraNW(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - 2, currentCell.ColumnNumber - columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        //southeastextra targeting range
+        private void TargetextraSE(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + 2, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // southwestextra targeting range
+        private void TargetextraSW(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 1;
+            int rowIndexer = 2;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - 2, currentCell.ColumnNumber + columnIndexer].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // eastnortheastextra targeting range
+        private void TargetextraENE(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber - 2].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // westnorthwestextra targeting range
+        private void TargetextraWNW(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber - 2].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // eastsoutheastextra targeting range
+        private void TargetextraESE(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber + rowIndexer, currentCell.ColumnNumber + 2].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        // westsouthwestextra targeting range
+        private void TargetextraWSW(int cellCount, Cell currentCell)
+        {
+            int columnIndexer = 2;
+            int rowIndexer = 1;
+            int startingCell = 0;
+
+            while (inBounds(rowIndexer, columnIndexer)
+                && startingCell < cellCount)
+            {
+                theGrid[currentCell.RowNumber - rowIndexer, currentCell.ColumnNumber + 2].LegalNextMove = true;
+                startingCell++;
+                columnIndexer++;
+                rowIndexer++;
+            }
+        }
+
+        #endregion
+
+
+
+
+        public void MarkNextLegalMoves( Cell currentCell, string targetingChoice)
         {
             // step 1 - clear all previous legal moves
             for (int i = 0;i < Size;i++)
@@ -68,66 +621,135 @@ namespace ChessBoardModel1
             }
 
                 // step 2 - find all legal moves and mark the cells as "legal"
-                // need to find a way to mark movement for other pieces that are able to move to board limit - while loop??
+                // need to find a way to mark movement for other pieces that are able to move to board limit - loop??
 
-                switch (chessPiece)
+                switch (targetingChoice)
                 {
 
-                    case "Knight":
-                    if (inBounds(currentCell.RowNumber + 2, currentCell.ColumnNumber + 1))
-                        theGrid[currentCell.RowNumber + 2, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber + 2, currentCell.ColumnNumber - 1))
-                        theGrid[currentCell.RowNumber + 2, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber - 2, currentCell.ColumnNumber + 1))
-                        theGrid[currentCell.RowNumber - 2, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber - 2, currentCell.ColumnNumber - 1))
-                        theGrid[currentCell.RowNumber - 2, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber + 1, currentCell.ColumnNumber + 2))
-                        theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber + 2].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber + 1, currentCell.ColumnNumber - 2))
-                        theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber - 2].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber - 1, currentCell.ColumnNumber + 2))
-                        theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber + 2].LegalNextMove = true;
-                    if (inBounds(currentCell.RowNumber - 1, currentCell.ColumnNumber - 2))
-                        theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber - 2].LegalNextMove = true;
+                    case "AIM-120": // UNFINISHED can move orthogonally and diagonally
+                    // Radar A2A Missile
+
+                    // main direction
+                    TargetNorth(6, currentCell);
+                    TargetSouth(6, currentCell);
+                    TargetEast(6, currentCell);
+                    TargetWest(6, currentCell);
+
+                    // thicken main direction
+                    TargetNorthA(6, currentCell);
+                    TargetNorthB(6, currentCell);
+                    TargetSouthA(6, currentCell);
+                    TargetSouthB(6, currentCell);
+                    TargetEastA(6, currentCell);
+                    TargetEastB(6, currentCell);
+                    TargetWestA(6, currentCell);
+                    TargetWestB(6, currentCell);
+
+                    // diagonals
+                    TargetNorthEast(6, currentCell);
+                    TargetNorthWest(6, currentCell);
+                    TargetSouthEast(6, currentCell);
+                    TargetSouthWest(6, currentCell);
+
+                    // thicken diagonals
+                    TargetNNEast(4, currentCell);
+                    TargetSSEast(4, currentCell);
+                    TargetENEast(4, currentCell);
+                    TargetESEast(4, currentCell);
+                    TargetNNWest(4, currentCell);
+                    TargetSSWest(4, currentCell);
+                    TargetWNWest(4, currentCell);
+                    TargetWSWest(4, currentCell);
+
+                    // extras
+                    TargetextraNE(4, currentCell);
+                    TargetextraNW(4, currentCell);
+                    TargetextraSE(4, currentCell);
+                    TargetextraSW(4, currentCell);
+                    TargetextraENE(4, currentCell);
+                    TargetextraWNW(4, currentCell);
+                    TargetextraESE(4, currentCell);
+                    TargetextraWSW(4, currentCell);
+
                     break;
 
 
+                    case "AIRS-T": // UNFINISHED can move orthogonally and diagonally
+                               // Heat seeking A2A missile - can lock missiles!
+                    TargetNorth(5, currentCell);
+                    TargetSouth(5, currentCell);
+                    TargetEast(5, currentCell);
+                    TargetWest(5, currentCell);
 
-                case "King": // can move 1 space in any direction ** NEED TO TEST
-                        if (inBounds(currentCell.RowNumber + 1, currentCell.ColumnNumber + 0))
-                            theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber + 0].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber - 1, currentCell.ColumnNumber - 0))
-                            theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber - 0].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber + 0, currentCell.ColumnNumber + 1))
-                            theGrid[currentCell.RowNumber + 0, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber - 0, currentCell.ColumnNumber - 1))
-                            theGrid[currentCell.RowNumber - 0, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber + 1, currentCell.ColumnNumber + 1))
-                            theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber - 1, currentCell.ColumnNumber - 1))
-                            theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber - 1, currentCell.ColumnNumber + 1))
-                            theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber + 1].LegalNextMove = true;
-                        if (inBounds(currentCell.RowNumber + 1, currentCell.ColumnNumber - 1))
-                            theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber - 1].LegalNextMove = true;
-                        break;
+                    //thicken main direction
+                    TargetNorthA(5, currentCell);
+                    TargetNorthB(5, currentCell);
+                    TargetSouthA(5, currentCell);
+                    TargetSouthB(5, currentCell);
+                    TargetEastA(5, currentCell);
+                    TargetEastB(5, currentCell);
+                    TargetWestA(5, currentCell);
+                    TargetWestB(5, currentCell);
 
-                    case "Rook": //unfinished can move orthogonally as far as board limit
-                                 // while loop is to try to keep expanding the LegalNextMove options until it finds the board edge limit
-                                 // this code below does not work
-                    if (inBounds(currentCell.RowNumber + 1 , currentCell.ColumnNumber - 0))
-                        theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber - 0].LegalNextMove = true;
+                    //diagonals
+                    TargetNorthEast(5, currentCell);
+                    TargetNorthWest(5, currentCell);
+                    TargetSouthEast(5, currentCell);
+                    TargetSouthWest(5, currentCell);
                     break;
 
 
-                    case "Bishop": // can move diagonally as far as board limit
-                        break;
+                    case "GBU-38": // UNFINISHED can move orthogonally and diagonally
+                                   // GPS Guided A2G bomb
 
+                    // main direction
+                    TargetNorth(5, currentCell);
+                    TargetSouth(5, currentCell);
+                    TargetEast(5, currentCell);
+                    TargetWest(5, currentCell);
 
-                    case "Queen": // can move othogonally and diagonally as far as board limit
-                    
+                    // thicken main direction
+                    TargetNorthA(4, currentCell);
+                    TargetNorthB(4, currentCell);
+                    TargetSouthA(4, currentCell);
+                    TargetSouthB(4, currentCell);
+                    TargetEastA(4, currentCell);
+                    TargetEastB(4, currentCell);
+                    TargetWestA(4, currentCell);
+                    TargetWestB(4, currentCell);
+
+                    // diagonals
+                    TargetNorthEast(2, currentCell);
+                    TargetNorthWest(2, currentCell);
+                    TargetSouthEast(2, currentCell);
+                    TargetSouthWest(2, currentCell);
+
                     break;
+
+
+                    case "AGM-88": // UNFINISHED can move orthogonally and diagonally
+                                   // Anti radiation missile A2A & A2G
+                                   // main direction
+                    TargetNorth(7, currentCell);
+                    TargetSouth(7, currentCell);
+                    TargetEast(7, currentCell);
+                    TargetWest(7, currentCell);
+
+                    // diagonals
+                    TargetNorthEast(7, currentCell);
+                    TargetNorthWest(7, currentCell);
+                    TargetSouthEast(7, currentCell);
+                    TargetSouthWest(7, currentCell);
+                    break;
+
+
+                    case "Vulcan Cannon": // can move orthogonally and diagonally
+                                          // Burst rounds A2A & A2G
+                    TargetNorth(3, currentCell);
+                    TargetSouth(3, currentCell);
+                    TargetEast(3, currentCell);
+                    TargetWest(3, currentCell);
+                    break; 
 
                     default:
                         break;
