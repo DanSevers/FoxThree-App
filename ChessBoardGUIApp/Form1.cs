@@ -148,11 +148,61 @@ namespace ChessBoardGUIApp
             */
         }
 
+
+
+
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+        // TO DO!
+        // button to clear targeting system
+        // generate random number for all 3 flare buttons and display in each button's assigned label
+
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             // Clear current onscreen targeting info
-            
-                }
-            
+
+        }
+
+
+        // How do I make this work...
+        //Created class, method.. do I even need to or can it all be done here
+
+        private void btnFlare1_Click(object sender, EventArgs e)
+        {
+        int randomNum;
+
+        Random random = new Random();
+
+        for (int i = 0; i < 5; i++)
+        {
+            randomNum = random.Next(1, 7);
+        }
+        //Parse???
+
+        //why dont either of these work
+        //string flareResult = int randomNum;
+        //Convert.ToString(randomNum);
+
+        // display random number in label
+        //lblFlare1.Text = ;
+        }
+
+        private void btnFlare2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFlare3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
