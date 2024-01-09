@@ -42,6 +42,13 @@
             lblFlare3 = new Label();
             panel2 = new Panel();
             label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            btnAim120 = new Button();
+            btnAirst = new Button();
+            btnAgm88 = new Button();
+            btnGbu38 = new Button();
+            btnVulcan = new Button();
             ((System.ComponentModel.ISupportInitialize)fileSystemWatcher1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -49,7 +56,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(43, 9);
+            label1.Location = new Point(669, 15);
             label1.Name = "label1";
             label1.Size = new Size(329, 15);
             label1.TabIndex = 0;
@@ -62,7 +69,7 @@
             comboBox1.ForeColor = Color.Black;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Target", "AIM-120", "AIRS-T", "AGM-88", "GBU-38", "Vulcan Cannon" });
-            comboBox1.Location = new Point(646, 6);
+            comboBox1.Location = new Point(1036, 12);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 1;
@@ -70,7 +77,7 @@
             // 
             // panel1
             // 
-            panel1.Location = new Point(22, 35);
+            panel1.Location = new Point(274, 41);
             panel1.Name = "panel1";
             panel1.Size = new Size(925, 925);
             panel1.TabIndex = 2;
@@ -82,11 +89,13 @@
             // 
             // btnClear
             // 
-            btnClear.BackColor = Color.MediumTurquoise;
+            btnClear.BackColor = Color.DarkCyan;
             btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Location = new Point(427, 972);
+            btnClear.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.MintCream;
+            btnClear.Location = new Point(46, 513);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(152, 28);
+            btnClear.Size = new Size(173, 38);
             btnClear.TabIndex = 3;
             btnClear.Text = "Clear Cells";
             btnClear.UseVisualStyleBackColor = false;
@@ -169,7 +178,7 @@
             panel2.Controls.Add(btnFlare1);
             panel2.Controls.Add(lblFlare1);
             panel2.Controls.Add(btnFlare2);
-            panel2.Location = new Point(986, 70);
+            panel2.Location = new Point(1227, 62);
             panel2.Name = "panel2";
             panel2.Size = new Size(291, 328);
             panel2.TabIndex = 10;
@@ -180,11 +189,100 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Gold;
-            label2.Location = new Point(1082, 35);
+            label2.Location = new Point(1323, 27);
             label2.Name = "label2";
             label2.Size = new Size(98, 32);
             label2.TabIndex = 10;
             label2.Text = "FLARES";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Impact", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Gold;
+            label3.Location = new Point(-3, -4);
+            label3.Name = "label3";
+            label3.Size = new Size(281, 80);
+            label3.TabIndex = 11;
+            label3.Text = "FoxThree";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Impact", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Gold;
+            label4.Location = new Point(12, 146);
+            label4.Name = "label4";
+            label4.Size = new Size(246, 34);
+            label4.TabIndex = 12;
+            label4.Text = "Choose your weapon";
+            // 
+            // btnAim120
+            // 
+            btnAim120.BackColor = Color.LightBlue;
+            btnAim120.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAim120.Location = new Point(23, 208);
+            btnAim120.Name = "btnAim120";
+            btnAim120.Size = new Size(227, 41);
+            btnAim120.TabIndex = 13;
+            btnAim120.Text = "AIM-120";
+            btnAim120.UseVisualStyleBackColor = false;
+            btnAim120.MouseEnter += MyButton_MouseEnter;
+            btnAim120.MouseLeave += MyButton_MouseLeave;
+            // 
+            // btnAirst
+            // 
+            btnAirst.BackColor = Color.LightSalmon;
+            btnAirst.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAirst.Location = new Point(23, 266);
+            btnAirst.Name = "btnAirst";
+            btnAirst.Size = new Size(227, 41);
+            btnAirst.TabIndex = 14;
+            btnAirst.Text = "AIRS-T";
+            btnAirst.UseVisualStyleBackColor = false;
+            btnAirst.MouseEnter += MyButton_MouseEnter;
+            btnAirst.MouseLeave += MyButton_MouseLeave;
+            // 
+            // btnAgm88
+            // 
+            btnAgm88.BackColor = Color.GhostWhite;
+            btnAgm88.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgm88.Location = new Point(23, 323);
+            btnAgm88.Name = "btnAgm88";
+            btnAgm88.Size = new Size(227, 41);
+            btnAgm88.TabIndex = 15;
+            btnAgm88.Text = "AGM-88";
+            btnAgm88.UseVisualStyleBackColor = false;
+            btnAgm88.MouseEnter += MyButton_MouseEnter;
+            btnAgm88.MouseLeave += MyButton_MouseLeave;
+            // 
+            // btnGbu38
+            // 
+            btnGbu38.BackColor = Color.DarkSeaGreen;
+            btnGbu38.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGbu38.Location = new Point(23, 379);
+            btnGbu38.Name = "btnGbu38";
+            btnGbu38.Size = new Size(227, 41);
+            btnGbu38.TabIndex = 16;
+            btnGbu38.Text = "GBU-38";
+            btnGbu38.UseVisualStyleBackColor = false;
+            btnGbu38.MouseEnter += MyButton_MouseEnter;
+            btnGbu38.MouseLeave += MyButton_MouseLeave;
+            // 
+            // btnVulcan
+            // 
+            btnVulcan.BackColor = Color.LightGray;
+            btnVulcan.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnVulcan.Location = new Point(23, 436);
+            btnVulcan.Name = "btnVulcan";
+            btnVulcan.Size = new Size(227, 41);
+            btnVulcan.TabIndex = 17;
+            btnVulcan.Text = "Vulcan Cannon";
+            btnVulcan.UseVisualStyleBackColor = false;
+            btnVulcan.MouseEnter += MyButton_MouseEnter;
+            btnVulcan.MouseLeave += MyButton_MouseLeave;
             // 
             // Form1
             // 
@@ -192,10 +290,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1313, 1012);
+            ClientSize = new Size(1530, 1012);
+            Controls.Add(btnVulcan);
+            Controls.Add(btnGbu38);
+            Controls.Add(btnAgm88);
+            Controls.Add(btnAirst);
+            Controls.Add(btnAim120);
+            Controls.Add(panel1);
+            Controls.Add(label4);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(btnClear);
-            Controls.Add(panel1);
             Controls.Add(comboBox1);
             Controls.Add(label1);
             Controls.Add(panel2);
@@ -224,5 +329,12 @@
         private Button btnFlare1;
         private Panel panel2;
         private Label label2;
+        private Label label4;
+        private Label label3;
+        private Button btnVulcan;
+        private Button btnGbu38;
+        private Button btnAgm88;
+        private Button btnAirst;
+        private Button btnAim120;
     }
 }

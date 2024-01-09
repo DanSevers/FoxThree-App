@@ -55,7 +55,10 @@ namespace ChessBoardModel1
 
 
 
-        #region Targeting System 
+
+
+
+        #region Targeting Direction Methods (too many!) 
         // (Needs simplifying LOL)
 
 
@@ -90,6 +93,7 @@ namespace ChessBoardModel1
                 columnIndexer ++;
             }
         }
+        
 
         // east targeting range
         private void TargetEast(int cellCount, Cell currentCell)
@@ -604,6 +608,8 @@ namespace ChessBoardModel1
         }
 
         #endregion
+
+
 
 
 

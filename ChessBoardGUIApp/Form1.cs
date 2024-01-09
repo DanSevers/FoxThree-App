@@ -56,6 +56,8 @@ namespace ChessBoardGUIApp
 
         }
 
+
+
         // Create another click event to mark where your target is before entering the next click event below.
 
 
@@ -200,6 +202,101 @@ namespace ChessBoardGUIApp
 
         private void btnFlare3_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+        #region Mouse Enter and Leave Methods for Weapon Selection Buttons
+        // does not work properly
+        // each button displays btnAim120 properties
+
+        string aim120 = "Air to air - radar guided";
+        string airsT = "Air to air - radar guided, can lock missiles";
+        string agm88 = "Air to ground - radar guided, locks locking structure";
+        string gbu38 = "Air to ground - GPS guided";
+        string vulCan = "Free fire cannon";
+
+        private void MyButton_MouseEnter(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.WhiteSmoke;
+
+            if (sender is Button btnAim120)
+            {
+                button.Text = aim120;
+            }
+
+            else if (sender is Button btnAirsT) 
+                        
+            {
+                button.Text = airsT;
+            }
+
+            else if (sender is Button btnAgm88)
+
+            {
+                button.Text = agm88;
+            }
+
+            else if (sender is Button btnGbu38)
+
+            {
+                button.Text = gbu38;
+            }
+
+            else if (sender is Button btnVulcan)
+
+            {
+                button.Text = vulCan;
+            }
+
+            button.Font = new Font(button.Font.FontFamily, 10, button.Font.Style);
+        }
+
+        private void MyButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Change the button's appearance when the mouse leaves
+            Button button = (Button)sender;
+
+            if (sender is Button btnAim120)
+            {
+                button.BackColor = Color.LightBlue;
+                button.Text = "AIM-120";
+            }
+
+            else if (sender is Button btnAirsT)
+
+            {
+                button.BackColor = Color.LightSalmon;
+                button.Text = "AIRS-T";
+            }
+
+            else if (sender is Button btnAgm88)
+
+            {
+                button.BackColor = Color.GhostWhite;
+                button.Text = "AGM-88";
+            }
+
+            else if (sender is Button btnGbu38)
+
+            {
+                button.BackColor = Color.DarkSeaGreen;
+                button.Text = "GBU-38";
+            }
+
+            else if (sender is Button btnVulcan)
+
+            {
+                button.BackColor = Color.LightGray;
+                button.Text = "Vulcan Cannon";
+            }
+
+            
+            button.Font = new Font(button.Font.FontFamily, 14, button.Font.Style);
+
+            #endregion
+
 
         }
 
